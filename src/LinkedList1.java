@@ -300,6 +300,8 @@ public class LinkedList1 {
             LinkedList cl = mergeTwoSortedList(fsh, ssh);
             return cl;
         }
+
+        // remove duplicates from the linkedlist
         public void removeDuplicates() {
             LinkedList res = new LinkedList();
 
@@ -347,6 +349,40 @@ public class LinkedList1 {
                 this.size = even.size;
             }
         } 
+
+        // Perform K reverse in a linkedlist
+        public void kReverse(int k) {
+            LinkedList prev = null;
+            while(this.size > 0) {
+                LinkedList current = new LinkedList();
+                
+                if(this.size >= k) {
+                    for(int i=0; i<k; i++) {
+                        int val = this.getFirst();
+                        this.removeFirst();
+                        current.addFirst(val);
+                    }
+                } else {
+                    int s = this.size();
+                    for(int i=0; i<s; i++) {
+                        int val = this.getFirst();
+                        this.removeFirst();
+                        current.addFirst(val);
+                    }
+                }
+                if(prev == null) {
+                    prev = current;
+                } else {
+                    prev.tail.next = current.head;
+                    prev.tail = current.tail;
+                    prev.size += current.size;
+                }
+            }
+            this.head = prev.head;
+            this.tail = prev.tail;
+            this.size = prev.size;
+        }
+
     }
 
     public static void main(String[] args) {
