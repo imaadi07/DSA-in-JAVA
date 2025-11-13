@@ -383,6 +383,21 @@ public class LinkedList1 {
             this.size = prev.size;
         }
 
+        // Helper function to reverse node
+        private void displayReverseHelper(Node node) {
+            if(node == null) {
+                return;
+            }
+            displayReverseHelper(node.next);
+            System.out.print(node.data + " -> ");
+        }
+
+        // Reversing a linkedlist using Recursive function
+        public void displayReverse() {
+            displayReverseHelper(head);
+            System.out.println();
+        }
+
     }
 
     public static void main(String[] args) {
@@ -405,6 +420,10 @@ public class LinkedList1 {
         l1.reverseID();
         System.out.println("Reversed:");
         l1.display();
+
+        System.out.println("Reversed recurssively: ");
+        l1.displayReverse();
+        // l1.display();
 
         System.out.println("Duplicate removed: ");
         l1.removeDuplicates();
