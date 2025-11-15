@@ -52,7 +52,7 @@ public class QueueToStack2 {
                 helperQ.add(val);
                 while(helperQ.size() > 0) {
                     mainQ.add(helperQ.remove());
-                }
+                } 
                 return val;
             }
         }
