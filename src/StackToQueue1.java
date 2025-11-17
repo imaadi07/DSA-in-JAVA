@@ -45,7 +45,7 @@ public class StackToQueue1 {
         public int peek() {
             if(mainS.isEmpty()) {
                 System.out.println("Queue Underflow");
-                return -1;
+                return -1; 
             } else {
                 return mainS.peek();
             }
