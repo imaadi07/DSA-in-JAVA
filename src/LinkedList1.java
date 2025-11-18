@@ -398,6 +398,31 @@ public class LinkedList1 {
             System.out.println();
         }
 
+
+        // ReverseDR helper that returns a node
+        private void reverseDRHelper(Node right, int floor) {
+            if(right == null) {
+                return;
+            }
+            reverseDRHelper(right.next, floor + 1);
+            
+            if(floor >= size / 2) {
+                int temp = right.data;
+                right.data = rleft.data;
+                rleft.data = temp;
+                
+                rleft = rleft.next;
+            }
+        }
+
+        // Helper node to keep track of right and left
+        Node rleft;
+        
+        // Recurssive reversing of data in linkedList
+        public void reverseDR() {
+            rleft = head;
+            reverseDRHelper(head, 0);
+        }
     }
 
     public static void main(String[] args) {
@@ -435,5 +460,12 @@ public class LinkedList1 {
 
         System.out.println("Kth element from the last (k=3): " + l1.kthFromLast(3));
         System.out.println("Mid of the List: " + l1.midOfList());
+        
+
+        System.out.println("Orignal: ");
+        l1.display();
+        l1.reverseDR();
+        System.out.println("Recirsive Data Reverse: ");
+        l1.display();
     }
 }
