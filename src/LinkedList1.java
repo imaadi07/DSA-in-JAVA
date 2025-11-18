@@ -216,8 +216,13 @@ public class LinkedList1 {
             }
         }
 
-        // Kth element from the end
+        // Kth element from the end (fixed)
         public int kthFromLast(int k) {
+            if (k < 0 || k >= size) {
+                System.out.println("Invalid k");
+                return -1;
+            }
+
             Node slow = head;
             Node fast = head;
 
@@ -244,7 +249,7 @@ public class LinkedList1 {
             return slow.data;
         }
 
-        // Merge two sorted lists (made static for convenience)
+        // Merge two sorted lists 
         public static LinkedList mergeTwoSortedList(LinkedList l1, LinkedList l2) {
             Node one = l1.head;
             Node two = l2.head;
@@ -301,18 +306,19 @@ public class LinkedList1 {
             return cl;
         }
 
-        // remove duplicates from the linkedlist
+        // remove duplicates (works only on sorted list)
         public void removeDuplicates() {
             LinkedList res = new LinkedList();
 
-            while(this.size() > 0) {
+            while (this.size() > 0) {
                 int val = this.getFirst();
                 this.removeFirst();
 
-                if(res.size == 0 || res.tail.data != val) {
+                if (res.size == 0 || res.tail.data != val) {
                     res.addLast(val);
                 }
             }
+
             this.head = res.head;
             this.tail = res.tail;
             this.size = res.size;
@@ -322,19 +328,18 @@ public class LinkedList1 {
             LinkedList odd = new LinkedList();
             LinkedList even = new LinkedList();
 
-
-            while(this.size > 0) {
+            while (this.size > 0) {
                 int val = this.getFirst();
                 this.removeFirst();
 
-                if(val % 2 == 0) {
+                if (val % 2 == 0) {
                     even.addLast(val);
                 } else {
-                    odd.addLast(val); 
+                    odd.addLast(val);
                 }
             }
 
-            if(odd.size > 0 && even.size > 0) {
+            if (odd.size > 0 && even.size > 0) {
                 odd.tail.next = even.head;
                 this.head = odd.head;
                 this.tail = even.tail;
@@ -348,29 +353,30 @@ public class LinkedList1 {
                 this.tail = even.tail;
                 this.size = even.size;
             }
-        } 
+        }
 
         // Perform K reverse in a linkedlist
         public void kReverse(int k) {
             LinkedList prev = null;
-            while(this.size > 0) {
+            while (this.size > 0) {
                 LinkedList current = new LinkedList();
-                
-                if(this.size >= k) {
-                    for(int i=0; i<k; i++) {
+
+                if (this.size >= k) {
+                    for (int i = 0; i < k; i++) {
                         int val = this.getFirst();
                         this.removeFirst();
                         current.addFirst(val);
                     }
                 } else {
                     int s = this.size();
-                    for(int i=0; i<s; i++) {
+                    for (int i = 0; i < s; i++) {
                         int val = this.getFirst();
                         this.removeFirst();
                         current.addFirst(val);
                     }
                 }
-                if(prev == null) {
+
+                if (prev == null) {
                     prev = current;
                 } else {
                     prev.tail.next = current.head;
@@ -378,6 +384,7 @@ public class LinkedList1 {
                     prev.size += current.size;
                 }
             }
+
             this.head = prev.head;
             this.tail = prev.tail;
             this.size = prev.size;
@@ -385,7 +392,7 @@ public class LinkedList1 {
 
         // Helper function to reverse node
         private void displayReverseHelper(Node node) {
-            if(node == null) {
+            if (node == null) {
                 return;
             }
             displayReverseHelper(node.next);
@@ -395,33 +402,56 @@ public class LinkedList1 {
         // Reversing a linkedlist using Recursive function
         public void displayReverse() {
             displayReverseHelper(head);
-            System.out.println();
+            System.out.println("END");
         }
-
 
         // ReverseDR helper that returns a node
         private void reverseDRHelper(Node right, int floor) {
-            if(right == null) {
+            if (right == null) {
                 return;
             }
             reverseDRHelper(right.next, floor + 1);
-            
-            if(floor >= size / 2) {
+
+            if (floor >= size / 2) {
                 int temp = right.data;
                 right.data = rleft.data;
                 rleft.data = temp;
-                
+
                 rleft = rleft.next;
             }
         }
 
         // Helper node to keep track of right and left
         Node rleft;
-        
+
         // Recurssive reversing of data in linkedList
         public void reverseDR() {
             rleft = head;
             reverseDRHelper(head, 0);
+        }
+
+        // Helper function helping identify a pallindrome sequence
+        private boolean isPallindromeHelper(Node right) {
+            if (right == null) {
+                return true;
+            }
+            boolean res = isPallindromeHelper(right.next);
+
+            if (res == false) {
+                return false;
+            } else if (pleft.data != right.data) {
+                return false;
+            } else {
+                pleft = pleft.next;
+                return true;
+            }
+        }
+
+        Node pleft;
+
+        public boolean isPallindrome() {
+            pleft = head;
+            return isPallindromeHelper(head);
         }
     }
 
@@ -431,13 +461,8 @@ public class LinkedList1 {
         l1.addFirst(10);
         l1.addLast(10);
         l1.addLast(20);
-        l1.addLast(20);
-        l1.addLast(30);
-        l1.addLast(30);
-        l1.addLast(40);
-        l1.addLast(40);
-        l1.addFirst(21);
-        // l1.addAtIndex(2, 25);
+        l1.addLast(10);
+        l1.addLast(10);
 
         System.out.println("Original:");
         l1.display();
@@ -446,9 +471,8 @@ public class LinkedList1 {
         System.out.println("Reversed:");
         l1.display();
 
-        System.out.println("Reversed recurssively: ");
+        System.out.println("Reversed recursively: ");
         l1.displayReverse();
-        // l1.display();
 
         System.out.println("Duplicate removed: ");
         l1.removeDuplicates();
@@ -460,12 +484,13 @@ public class LinkedList1 {
 
         System.out.println("Kth element from the last (k=3): " + l1.kthFromLast(3));
         System.out.println("Mid of the List: " + l1.midOfList());
-        
 
-        System.out.println("Orignal: ");
+        System.out.println("Original: ");
         l1.display();
         l1.reverseDR();
-        System.out.println("Recirsive Data Reverse: ");
+        System.out.println("Recursive Data Reverse: ");
         l1.display();
+
+        System.out.println("Given list is palindrome: " + l1.isPallindrome());
     }
 }
