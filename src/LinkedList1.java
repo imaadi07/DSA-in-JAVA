@@ -453,6 +453,29 @@ public class LinkedList1 {
             pleft = head;
             return isPallindromeHelper(head);
         }
+
+        // Helper function that will fold the linkedList
+        private void foldHelper(Node right, int floor) {
+            if(right == null) {
+                return;
+            }
+            foldHelper(right.next, floor + 1);
+            
+            if(floor > size / 2) {
+                Node temp = fleft.next;
+                fleft.next = right;
+                right.next = temp;
+                fleft = temp;
+            } else if(floor == size / 2) {
+                tail = right;
+                tail.next = null;
+            }
+        }
+        Node fleft;
+        public void fold() {
+            fleft = head;
+            foldHelper(head, 0);
+        }
     }
 
     public static void main(String[] args) {
@@ -463,6 +486,9 @@ public class LinkedList1 {
         l1.addLast(20);
         l1.addLast(10);
         l1.addLast(10);
+        l1.addLast(30);
+        l1.addLast(40);
+        l1.addLast(50);
 
         System.out.println("Original:");
         l1.display();
@@ -492,5 +518,10 @@ public class LinkedList1 {
         l1.display();
 
         System.out.println("Given list is palindrome: " + l1.isPallindrome());
+        System.out.print("Orignal list: ");
+        l1.display();
+        l1.fold(); 
+        System.out.print("Folded list: ");
+        l1.display();
     }
 }
