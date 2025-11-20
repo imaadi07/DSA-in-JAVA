@@ -472,9 +472,32 @@ public class LinkedList1 {
             }
         }
         Node fleft;
-        public void fold() {
+        public void fold() { 
             fleft = head;
             foldHelper(head, 0);
+        }
+
+        public static int findIntersection(LinkedList one, LinkedList two) {
+            Node t1 = one.head;
+            Node t2 = two.head;
+            
+            int delta = Math.abs(one.size - two.size);
+            if(one.size > two.size) {
+                for(int i=0; i<delta; i++) {
+                    t2 = t2.next;
+                }
+            } else {
+                for(int i=0; i<delta; i++) {
+                    t1 = t1.next;
+                }
+            }
+
+            while(t1 != t2) {
+                t1 = t1.next;
+                t2 = t2.next;
+            }
+
+            return t1.data;
         }
     }
 
