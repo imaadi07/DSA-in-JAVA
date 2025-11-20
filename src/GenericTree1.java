@@ -9,9 +9,9 @@ public class GenericTree1 {
 
 
     public static void main(String[] args) {
-        int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,10,110,-1,100,-1,-1,90,-1,-1,40,100,-1,-1,-1};
+        int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,100,-1,-1,90,-1,-1,40,100,-1,-1,-1};
         
-        Node root;
+        Node root = null;
         Stack<Node> st = new Stack<>();
 
         for(int i=0; i<arr.length; i++) {
@@ -28,6 +28,23 @@ public class GenericTree1 {
                 }
                 st.push(t);
             }
+        }
+        display(root);
+    }
+
+    // d(10) -> 10 will print itself and it's family.
+    // d(20), d(30), d(40) -> will print themselves and their family.
+    // d(10) = s(10) + d(20) + d(30) + d(40)
+    public static void display(Node node) {
+        String str = node.data + " -> ";
+        for(Node child:node.children) {
+            str += child.data + ", ";
+        }
+        str += ".";
+        System.out.println(str); 
+
+        for(Node child:node.children) {
+            display(child);
         }
     }
 }
