@@ -9,7 +9,7 @@ public class GenericTree1 {
 
 
     public static void main(String[] args) {
-        int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,100,-1,-1,90,-1,-1,40,100,-1,-1,-1};
+        int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,120,-1,-1,90,-1,-1,40,100,-1,-1,-1};
         
         Node root = null;
         Stack<Node> st = new Stack<>();
@@ -30,6 +30,8 @@ public class GenericTree1 {
             }
         }
         display(root);
+        int size = size(root);
+        System.out.println(size);
     }
 
     // d(10) -> 10 will print itself and it's family.
@@ -46,5 +48,16 @@ public class GenericTree1 {
         for(Node child:node.children) {
             display(child);
         }
+    }
+
+    public static int size(Node node) {
+        int s = 0;
+
+        for (Node child:node.children) {
+            int cs = size(child);
+            s = s + cs;
+        }
+        s = s + 1;
+        return s;
     }
 }
