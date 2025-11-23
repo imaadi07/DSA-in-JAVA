@@ -31,7 +31,8 @@ public class GenericTree1 {
         }
         display(root);
         int size = size(root);
-        System.out.println(size);
+        System.out.println("Size of the tree is: "+size);
+        System.out.println("Max in this tree is: "+maxOfTree(root));
     }
 
     // d(10) -> 10 will print itself and it's family.
@@ -59,5 +60,16 @@ public class GenericTree1 {
         }
         s = s + 1;
         return s;
+    }
+
+    public static int maxOfTree(Node node) {
+        int max = Integer.MIN_VALUE;
+        for(Node child : node.children) {
+            int cm = maxOfTree(child);
+            max = Math.max(cm, max);
+        }
+        max = Math.max(node.data, max);
+
+        return max;
     }
 }
