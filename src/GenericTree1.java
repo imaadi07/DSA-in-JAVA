@@ -34,6 +34,7 @@ public class GenericTree1 {
         System.out.println("Size of the tree is: "+size);
         System.out.println("Max in this tree is: "+maxOfTree(root));
         System.out.println("Height of this generic tree is: "+height(root));
+        Traversal(root);
     }
 
     // d(10) -> 10 will print itself and it's family.
@@ -50,6 +51,7 @@ public class GenericTree1 {
         for(Node child:node.children) {
             display(child);
         }
+        
     }
 
     public static int size(Node node) {
@@ -83,5 +85,15 @@ public class GenericTree1 {
         ht +=1;
 
         return ht;
+    }
+
+    public static void Traversal(Node node) {
+        System.out.println("Node Pre-Order: "+node.data);
+        for(Node child:node.children) {
+            System.out.println("Edge Pre-Order: "+node.data+" -- "+child.data);
+            Traversal(child);
+            System.out.println("Edge Post-Order: "+node.data+" -- "+child.data);
+        }
+        System.out.println("Node Post-Order: "+node.data);
     }
 }
