@@ -35,6 +35,7 @@ public class GenericTree1 {
         System.out.println("Max in this tree is: "+maxOfTree(root));
         System.out.println("Height of this generic tree is: "+height(root));
         Traversal(root);
+        LevelOrderTraversal(root);
     }
 
     // d(10) -> 10 will print itself and it's family.
@@ -95,5 +96,20 @@ public class GenericTree1 {
             System.out.println("Edge Post-Order: "+node.data+" -- "+child.data);
         }
         System.out.println("Node Post-Order: "+node.data);
+    }
+
+    public static void LevelOrderTraversal(Node node) {
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(node);
+        
+        while(q.size() > 0) {
+            node = q.remove();
+            System.out.print(node.data + " ");
+
+            for(Node child:node.children) {
+                q.add(child);
+            }
+        }
+        System.out.print(".");
     }
 }
