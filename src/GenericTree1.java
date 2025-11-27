@@ -34,8 +34,14 @@ public class GenericTree1 {
         System.out.println("Size of the tree is: "+size);
         System.out.println("Max in this tree is: "+maxOfTree(root));
         System.out.println("Height of this generic tree is: "+height(root));
+        System.out.print("Tree Traversal(DFS): ");
         Traversal(root);
-        LevelOrderTraversal(root);
+        System.out.println();
+        System.out.print("Level Order Traversal(BFS): ");
+        LevelOrderTraversal(root);  
+        System.out.println();
+        System.out.println("Level Order Line-Wise Traversal: ");
+        levelOrderLinewise(root);
     }
 
     // d(10) -> 10 will print itself and it's family.
@@ -111,5 +117,26 @@ public class GenericTree1 {
             }
         }
         System.out.print(".");
+    }
+
+    public static void levelOrderLinewise(Node node) {
+        Queue<Node> mq = new ArrayDeque<>();
+        Queue<Node> cq = new ArrayDeque<>();
+
+        mq.add(node);
+
+        while(mq.size() > 0) {
+            node = mq.remove();
+            System.out.print(node.data+" ");
+            for(Node child:node.children) {
+                cq.add(child);
+            }
+
+            if(mq.size() == 0) {
+                mq = cq;
+                cq = new ArrayDeque<>();
+                System.out.println();
+            }
+        }
     }
 }
