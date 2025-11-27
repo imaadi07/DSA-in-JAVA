@@ -42,6 +42,8 @@ public class GenericTree1 {
         System.out.println();
         System.out.println("Level Order Line-Wise Traversal: ");
         levelOrderLinewise(root);
+        System.out.println("Level Order Line-wise Zig Zag Traversal: ");
+        lineWiseZigZag(root);
     }
 
     // d(10) -> 10 will print itself and it's family.
@@ -140,5 +142,34 @@ public class GenericTree1 {
         }
     }
     
-    
+    public static void lineWiseZigZag(Node node) {
+        Stack<Node> ms = new Stack<>();
+        Stack<Node> cs = new Stack<>();
+        int flag = 1;
+        ms.push(node);
+
+        while(ms.size() > 0) {
+            node = ms.pop();
+            System.out.print(node.data+" ");
+
+            if(flag % 2 == 1) {
+                for(int i=0; i<node.children.size(); i++) {
+                    Node child = node.children.get(i);
+                    cs.push(child);
+                }
+            } else {
+                for(int i = node.children.size() - 1; i >= 0; i--) {
+                    Node child = node.children.get(i);
+                    cs.push(child);
+                }
+            }
+
+            if(ms.size() == 0) {
+                ms = cs;
+                cs = new Stack<>();
+                flag++;
+                System.out.println();
+            }
+        }
+    }
 }
