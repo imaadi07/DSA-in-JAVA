@@ -53,6 +53,9 @@ public class GenericTree1 {
         System.out.println();
         System.out.println("Level Order Line-wise Zig Zag Traversal: ");
         lineWiseZigZag(root);
+        System.out.println();
+        System.out.println("Level Order Line wise using Pair(node+level): ");
+        levelOrderLinewise4(root);
     }
 
     // d(10) -> 10 will print itself and it's family.
@@ -225,4 +228,35 @@ public class GenericTree1 {
             System.out.println();
         }
     }
+
+    public static class Pair {
+        Node node;
+        int level;
+
+        public Pair(Node node, int level) {
+            this.node = node;
+            this.level = level;
+        }
+    }
+
+    public static void levelOrderLinewise4(Node node) {
+        Queue<Pair> mq = new ArrayDeque<>();
+        mq.add(new Pair(node, 1));
+
+        int level = 1;
+        while(mq.size() > 0) {
+            Pair p = mq.remove();
+
+            if(p.level > level) {
+                level = p.level;
+                System.out.println();
+            } 
+            System.out.print(p.node.data + " ");
+            for(Node child:p.node.children) {
+                Pair cp = new Pair(child, p.level + 1);
+                mq.add(cp);
+            }
+        }
+    }
+
 }
