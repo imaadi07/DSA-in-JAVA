@@ -42,6 +42,9 @@ public class GenericTree1 {
         System.out.println();
         System.out.println("Level Order Line-Wise Traversal: ");
         levelOrderLinewise(root);
+        System.out.println("Second Approach level-order linewise: ");
+        levelOrderLinewise2(root);
+        System.out.println();
         System.out.println("Level Order Line-wise Zig Zag Traversal: ");
         lineWiseZigZag(root);
     }
@@ -169,6 +172,31 @@ public class GenericTree1 {
                 cs = new Stack<>();
                 flag++;
                 System.out.println();
+            }
+        }
+    }
+
+    public static void levelOrderLinewise2(Node node) {
+        Queue<Node> mq = new ArrayDeque<>();
+
+        Node marker = new Node();
+
+        mq.add(node);
+        mq.add(marker);
+
+        while(mq.size() > 0) {
+            node = mq.remove();
+            
+            if(node != marker) {
+                System.out.print(node.data+" ");
+                for(Node child:node.children) {
+                    mq.add(child);
+                }
+            } else {
+                if(mq.size() > 0) {
+                    mq.add(marker);
+                    System.out.println();
+                }
             }
         }
     }
