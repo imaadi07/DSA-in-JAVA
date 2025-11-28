@@ -40,10 +40,16 @@ public class GenericTree1 {
         System.out.print("Level Order Traversal(BFS): ");
         LevelOrderTraversal(root);  
         System.out.println();
+        System.out.println();
         System.out.println("Level Order Line-Wise Traversal: ");
         levelOrderLinewise(root);
+        System.out.println();
         System.out.println("Second Approach level-order linewise: ");
         levelOrderLinewise2(root);
+        System.out.println();
+        System.out.println();
+        System.out.println("Level Order Line-wise 3: ");
+        levelOrderLinewise3(root);
         System.out.println();
         System.out.println("Level Order Line-wise Zig Zag Traversal: ");
         lineWiseZigZag(root);
@@ -198,6 +204,25 @@ public class GenericTree1 {
                     System.out.println();
                 }
             }
+        }
+    }
+
+    public static void levelOrderLinewise3(Node node) {
+        Queue<Node> mq = new ArrayDeque<>();
+        mq.add(node);
+
+        while(mq.size() > 0) {
+            int cicl = mq.size();
+
+            for(int i=0; i<cicl; i++) {
+                node = mq.remove();
+                System.out.print(node.data + " ");
+
+                for(Node child:node.children) {
+                    mq.add(child);
+                }
+            }
+            System.out.println();
         }
     }
 }
