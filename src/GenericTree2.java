@@ -33,6 +33,9 @@ public class GenericTree2 {
         display(root);
         System.out.println("Mirror of the Generic tree: ");
         Mirror(root);
+        System.out.println("Removing leaves from the tree: ");
+        removeLeaves(root);
+        display(root);
     }
 
     public static void display(Node node) {
@@ -53,5 +56,18 @@ public class GenericTree2 {
             Mirror(child);
         }
         Collections.reverse(node.children);
+    }
+
+    public static void removeLeaves(Node node) {
+        for(int i=node.children.size() - 1; i>=0; i--) {
+            Node child = node.children.get(i);
+            if(child.children.size() == 0) {
+                node.children.remove(child);
+            }
+        }
+
+        for(Node child:node.children) {
+            removeLeaves(child);
+        }
     }
 }
