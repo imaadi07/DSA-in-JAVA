@@ -36,6 +36,9 @@ public class GenericTree2 {
         System.out.println("Removing leaves from the tree: ");
         removeLeaves(root);
         display(root);
+        System.out.println("Linearize a generic tree: ");
+        linearize(root);
+        display(root);
     }
 
     public static void display(Node node) {
@@ -69,5 +72,27 @@ public class GenericTree2 {
         for(Node child:node.children) {
             removeLeaves(child);
         }
+    }
+
+    public static void linearize(Node node) {
+        for(Node child:node.children) {
+            linearize(child);
+        }
+
+        while(node.children.size() > 1) {
+            Node lc = node.children.remove(node.children.size() - 1);
+            Node sl = node.children.get(node.children.size() - 1);
+            Node slt = getTail(sl);
+            slt.children.add(lc);
+        }
+    }
+
+    public static Node getTail(Node node) {
+        if(node.children.size() == 0) {
+            return node;
+        }
+
+        Node lastChild = node.children.get(node.children.size() - 1);
+        return getTail(lastChild);
     }
 }
