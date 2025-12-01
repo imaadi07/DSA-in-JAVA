@@ -39,6 +39,7 @@ public class GenericTree2 {
         System.out.println("Linearize a generic tree: ");
         linearize(root);
         display(root);
+        System.out.println("Finding the Match of 30: "+isMatch(root, 30));
     }
 
     public static void display(Node node) {
@@ -94,5 +95,19 @@ public class GenericTree2 {
 
         Node lastChild = node.children.get(node.children.size() - 1);
         return getTail(lastChild);
+    }
+
+    public static boolean isMatch(Node node, int data) {
+        if(data == node.data) {
+            return true;
+        } 
+        for(Node child:node.children) {
+            boolean fic = isMatch(child, data);
+            if(fic) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
