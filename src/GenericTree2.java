@@ -110,4 +110,22 @@ public class GenericTree2 {
 
         return false;
     }
+
+    public static ArrayList<Integer> nodeToRoot(Node node, int data) {
+        if(data == node.data) {
+            ArrayList<Integer> res = new ArrayList<>();
+            res.add(node.data);
+            return res;
+        }
+
+        for(Node child:node.children) {
+            ArrayList<Integer> ptc = nodeToRoot(child, data);
+            if(ptc.size() > 0) {
+                ptc.add(node.data);
+                return ptc;
+            }
+        }
+
+        return new ArrayList<>();
+    }
 }
