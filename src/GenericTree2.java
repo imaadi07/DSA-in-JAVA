@@ -40,6 +40,7 @@ public class GenericTree2 {
         linearize(root);
         display(root);
         System.out.println("Finding the Match of 30: "+isMatch(root, 30));
+        System.out.println("Lowest Common Ansesotr: " + lowestCommonAncestor(root, 70, 80));
     }
 
     public static void display(Node node) {
@@ -127,5 +128,22 @@ public class GenericTree2 {
         }
 
         return new ArrayList<>();
+    }
+
+    public static int lowestCommonAncestor(Node node, int d1, int d2) {
+        ArrayList<Integer> p1 = nodeToRoot(node, d1);
+        ArrayList<Integer> p2 = nodeToRoot(node, d2);
+
+        int i = p1.size() - 1;
+        int j = p2.size() - 1;
+
+        while(i >= 0 && j >= 0 && p1.get(i) == p2.get(j)) {
+            i--;
+            j--;
+        }
+        i++;
+        j++;
+
+        return p1.get(i);
     }
 }
