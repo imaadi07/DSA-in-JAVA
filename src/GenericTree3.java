@@ -8,7 +8,7 @@ public class GenericTree3 {
     }
     public static void main(String[] args) {
         int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,120,-1,-1,90,-1,-1,40,100,-1,-1,-1};
-        
+
         Node root = null;
         Stack<Node> st = new Stack<>();
 
@@ -79,5 +79,21 @@ public class GenericTree3 {
         j++;
 
         return i + j;   
+    }
+
+    public static boolean isTreeSimilarShape(Node n1, Node n2) {
+        if(n1.children.size() != n2.children.size()) {
+            return false;
+        }
+
+        while(n1.children.size() > 0) {
+            Node c1 = n1.children.remove(0);
+            Node c2 = n2.children.remove(0);
+
+            if(!isTreeSimilarShape(c1, c2)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
