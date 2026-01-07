@@ -96,4 +96,21 @@ public class GenericTree3 {
         }
         return true;
     }
+
+    public static boolean isMirror(Node n1, Node n2) {
+        if(n1.children.size() != n2.children.size()) {
+            return false;
+        }
+
+        for(int i=0; i<n1.children.size(); i++) {
+            int j = n1.children.size() - 1;
+            Node c1 = n1.children.remove(i);
+            Node c2 = n2.children.remove(j);
+            if(!isMirror(c1, c2)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
