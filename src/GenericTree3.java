@@ -75,7 +75,7 @@ public class GenericTree3 {
             j--;
         }
 
-        i++;
+        i++; 
         j++;
 
         return i + j;   
@@ -88,7 +88,7 @@ public class GenericTree3 {
 
         while(n1.children.size() > 0) {
             Node c1 = n1.children.remove(0);
-            Node c2 = n2.children.remove(0);
+            Node c2 = n2.children.remove(0); 
 
             if(!isTreeSimilarShape(c1, c2)) {
                 return false;
