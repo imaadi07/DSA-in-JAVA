@@ -113,4 +113,8 @@ public class GenericTree3 {
 
         return true;
     }
+
+    public static boolean isSymetric(Node node) {
+        return isMirror(node, node);
+    }
 }
