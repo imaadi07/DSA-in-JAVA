@@ -66,6 +66,7 @@ public class GenericTree4 {
         System.out.println("Ceil: " + ceil);
         System.out.println("Data: " + 110);
         System.out.println("Floor: "+floor);
+        System.out.println("Kth largest element: "+KthLargest(root, 2));
     }
 
     static Node predeccessor;
@@ -107,6 +108,27 @@ public class GenericTree4 {
         for(Node child:node.children) {
             ceilAndFloor(child, data);
         }
+    }
+
+    public static int KthLargest(Node node, int k) {
+        List<Integer> d = data(node);
+        if(k == 0 || k > d.size()) {
+            return -1;
+        }
+
+        d.sort(null);
+        int val = d.size() - k;
+        return d.get(val);
+    }
+
+    public static List<Integer> data(Node node) {
+        List<Integer> list = new ArrayList<>();
+        list.add(node.data);
+
+        for(Node child : node.children) {
+            list.addAll(data(child));   
+        }
+        return list;
     }
 
 }
