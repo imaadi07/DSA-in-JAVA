@@ -58,6 +58,14 @@ public class GenericTree4 {
         System.out.println("Predeccessor: "+predeccessor.data);
         System.out.println("Data: "+data);
         System.out.println("Successor: "+successor.data);
+        
+        ceil = Integer.MAX_VALUE;
+        floor = Integer.MIN_VALUE;
+
+        ceilAndFloor(root, 110);
+        System.out.println("Ceil: " + ceil);
+        System.out.println("Data: " + 110);
+        System.out.println("Floor: "+floor);
     }
 
     static Node predeccessor;
@@ -80,4 +88,25 @@ public class GenericTree4 {
             preAndSucc(child, data);
         }
     }
+
+    static int ceil;
+    static int floor;
+    public static void ceilAndFloor(Node node, int data) {
+        if(node.data > data) {
+            if(node.data < ceil) {
+                ceil = node.data;
+            }
+        }
+
+        if(node.data < data) {
+            if(node.data > floor) {
+                floor = node.data;
+            }
+        }
+
+        for(Node child:node.children) {
+            ceilAndFloor(child, data);
+        }
+    }
+
 }
