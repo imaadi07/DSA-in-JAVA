@@ -67,6 +67,7 @@ public class GenericTree4 {
         System.out.println("Data: " + 110);
         System.out.println("Floor: "+floor);
         System.out.println("Kth largest element: "+KthLargest(root, 2));
+        System.out.println("Kth Largest Optimized: " + KthLargestOptimized(root, 2));
     }
 
     static Node predeccessor;
@@ -108,6 +109,17 @@ public class GenericTree4 {
         for(Node child:node.children) {
             ceilAndFloor(child, data);
         }
+    }
+
+    public static int KthLargestOptimized(Node node, int k) {
+        floor = Integer.MIN_VALUE;
+        int factor = Integer.MAX_VALUE;
+        for(int i=0; i<k; i++) {
+            ceilAndFloor(node, factor);
+            factor = floor;
+            floor = Integer.MIN_VALUE;
+        }
+        return factor;
     }
 
     public static int KthLargest(Node node, int k) {
