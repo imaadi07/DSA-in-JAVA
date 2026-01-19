@@ -68,6 +68,9 @@ public class GenericTree4 {
         System.out.println("Floor: "+floor);
         System.out.println("Kth largest element: "+KthLargest(root, 2));
         System.out.println("Kth Largest Optimized: " + KthLargestOptimized(root, 2));
+        int result = retSumAndCalculate(root);
+        System.out.println("MSN: " + msn);
+        System.out.println("MS: "+ms);
     }
 
     static Node predeccessor;
@@ -143,4 +146,23 @@ public class GenericTree4 {
         return list;
     }
 
+    static int msn = 0;
+    static int ms = Integer.MIN_VALUE;
+
+    public static int retSumAndCalculate(Node node) {
+        int sum = 0;
+
+        for(Node child:node.children) {
+            int csum = retSumAndCalculate(child);
+            sum += csum;
+        }
+        sum += node.data;
+
+        if(sum > ms) {
+            msn = node.data;
+            ms = sum;
+        }
+
+        return sum;
+    }
 }
