@@ -68,9 +68,11 @@ public class GenericTree4 {
         System.out.println("Floor: "+floor);
         System.out.println("Kth largest element: "+KthLargest(root, 2));
         System.out.println("Kth Largest Optimized: " + KthLargestOptimized(root, 2));
-        int result = retSumAndCalculate(root);
+        int result = retSumAndCalculate(root); 
         System.out.println("MSN: " + msn);
         System.out.println("MS: "+ms);
+        int result2 = calculateDiameter(root);
+        System.out.println("Diameter of the tree is: "+diameter);
     }
 
     static Node predeccessor;
@@ -164,5 +166,30 @@ public class GenericTree4 {
         }
 
         return sum;
+    }
+
+    static int diameter = 0;
+
+    public static int calculateDiameter(Node node) {
+        int dch = -1;
+        int sdch = -1;
+
+        for(Node child:node.children) {
+            int ch = calculateDiameter(child);
+
+            if(ch > dch) {
+                sdch = dch;
+                dch = ch;
+            } else if (ch > sdch) {
+                sdch = ch;
+            }
+        }
+
+        if(dch + sdch + 2 > diameter) {
+            diameter = dch + sdch + 2;
+        }
+
+        dch += 1;
+        return dch;
     }
 }
